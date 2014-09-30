@@ -8,7 +8,8 @@ from appView import *
 
 urlpatterns = patterns('',
                        url(r'^$', MainView.as_view(), name='main'),
-                       url(r'^about/', TemplateView.as_view(template_name='peerShop/about.html'), name='about'),
+                       url(r'^faq/', TemplateView.as_view(template_name='peerShop/faq.html'), name='faq'),
+                       url(r'^guide/', TemplateView.as_view(template_name='peerShop/guide.html'), name='guide'),
                        url(r'^contact/', TemplateView.as_view(template_name='peerShop/contact.html'), name='contact'),
                        url(r'^community/(?P<pk>\d+)/$', CommunityDetailView.as_view(), name='community_detail'),
                        url(r'^user/(?P<username>\w+)/community/$', UserCommunityView.as_view(), name='user_community'),

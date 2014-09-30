@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}PeerShop{% endblock %}</title>
+    <title>{% block title %}{{ site_name }}{% endblock %}</title>
 
 
     <!-- Bootstrap core CSS -->
@@ -47,11 +47,12 @@
         <hr>
         <table>
             <tr class="footer">
-                <td><a href="{% url 'peerShop:about' %}">About</a></td>
+                <td><a href="{% url 'peerShop:guide' %}">User Guide</a></td>
+                <td><a href="{% url 'peerShop:faq' %}">FAQ</a></td>
                 <td><a href="{% url 'peerShop:contact' %}">Contact</a></td>
             </tr>
         </table>
-        <p>© PeerShop 2014</p>
+        <p>© {{ site_name }} 2014</p>
     </footer>
 
 

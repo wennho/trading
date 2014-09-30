@@ -14,16 +14,16 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'mydata',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'mydata',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'root',
         'PASSWORD': 'mystery',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',  # Set to empty string for default.
     }
 }
- 
+
 if not DEBUG:
     DATABASES = {
         'default': {
@@ -37,7 +37,7 @@ if not DEBUG:
         }
     }
 
-if 'test' in sys.argv or 'test_coverage' in sys.argv: #Covers regular testing and django-coverage
+if 'test' in sys.argv or 'test_coverage' in sys.argv:  # Covers regular testing and django-coverage
     DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 
@@ -100,7 +100,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -110,7 +110,7 @@ SECRET_KEY = 'zzruv=q1t=4x-484zv^(#n)sm^*&9a#81q^=k25n-fysrnst+z'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -192,9 +192,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
 )
 
-#===================================================================
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# ===================================================================
 # AllAuth
-#===================================================================
+# ===================================================================
 
 TEMPLATE_CONTEXT_PROCESSORS += (
 
@@ -232,7 +237,7 @@ INSTALLED_APPS += (
     'allauth.socialaccount',
 )
 
-#===================================================================
+# ===================================================================
 # Multi-file Upload
 #===================================================================
 
@@ -240,3 +245,8 @@ INSTALLED_APPS += (
     'fileupload',
 )
 
+#===================================================================
+# Site customization
+#===================================================================
+
+TEMPLATE_CONTEXT_PROCESSORS += ("peerShop.context_processor.settings",)
