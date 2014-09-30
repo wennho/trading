@@ -1,0 +1,15 @@
+{% if bid.status == 'Accepted' %}
+
+{% if FROM_RECEIVED_BIDS %}
+<a href="{% url 'accepted_received_bids' bid.bidUser.username %}?subject=Accepted Items">
+    <button class="btn btn-success bid-status-accept">{{ bid.status }}</button>
+</a>
+{% else %}
+<a href="{% url 'accepted_placed_bids' bid.itemUser.username %}?subject=Accepted Items">
+    <button class="btn btn-success bid-status-accept">{{ bid.status }}</button>
+</a>
+{% endif %}
+
+{% else %}
+<h4>{{ bid.status }}</h4>
+{% endif %}

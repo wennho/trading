@@ -1,0 +1,53 @@
+{% if bid %}
+<div id="{{ bid.id }}-bid">
+
+
+    <p class="bid">Last Bid: ${{ bid.bidPrice }}
+        <span class="glyphicon glyphicon-remove delete_cross" onclick="deleteBid({{bid.id}});"></span>
+    </p>
+
+    {% if bid.status == '-' %}
+    <form method="post" action="" class="form-inline" role="form" id="{{ bid.id }}-update-form">
+        <div class="input-group bid-input">
+            <input name="bidPrice" class="form-control" type="text"
+                   value="{{ bid.bidPrice }}"/>
+
+        <span class="input-group-btn">
+        <button type="button" onclick="updateBid({{ bid.id }});" class="btn btn-default">Bid</button>
+        </span>
+        </div>
+        <input name="id" type="hidden" value="{{ bid.id }}">
+        <input name="bidUser" type="hidden" value="{{ bid.user }}">
+        <input name="status" type="hidden" value="{{ bid.status }}">
+        <input name="item" type="hidden" value="{{ bid.item.id }}">
+    </form>
+    {% elif SHOWSTATUS %}
+    {% include 'peerShop/bid_status.html'%}
+    {% endif %}
+</div>
+
+{% elif request.user.is_authenticated %}
+
+<div id="{{ item.id }}">
+    {{ info | safe }}
+
+    <form method="post" action="" class="form-inline" role="form" id="{{ item.id }}-form">
+
+        <div class="input-group bid-input">
+            <input name="bidPrice" class="form-control" type="text"
+                   value="{{ item.price }}"/>
+
+                        <span class="input-group-btn">
+                        <button type="button" onclick="createBid({{ item.id }});" class="btn btn-default">Bid</button>
+                        </span>
+        </div>
+        <input name="item" type="hidden" value="{{ item.id }}">
+        <input name="status" type="hidden" value="-">
+    </form>
+</div>
+
+{% else %}
+
+        <p><a href="{% url 'account_login' %}">Log in</a> to bid</p>
+
+{% endif %}

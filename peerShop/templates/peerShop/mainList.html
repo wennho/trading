@@ -1,0 +1,35 @@
+<div class="row">
+    {% for item in object_list %}
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="thumbnail-container thumbnail">
+            <a href="{% url 'peerShop:item-detail' item.id %}">
+                <img src="{{ MEDIA_URL }}{{item.itempic_set.all.0.thumb}}" class="img-responsive"/>
+            </a>
+
+            <div class="caption bid-container">
+                <h3><a href="{% url 'peerShop:item-detail' item.id %}">{{ item.title }}</a></h3>
+
+                <h4>${{ item.price }}</h4>
+
+                {% block itemDetails %}
+                <p><a href="{% url 'peerShop:shop' item.user.username %}">{{ item.user.username }}</a></p>
+                {% endblock %}
+
+                {% include 'peerShop/bid.html' with bid=item.bid SHOWSTATUS=True %}
+
+            </div>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:2 %}
+    <div class="clearfix visible-sm"></div>
+    {% endif %}
+    {% if forloop.counter|divisibleby:3 %}
+    <div class="clearfix visible-md"></div>
+    {% endif %}
+    {% if forloop.counter|divisibleby:4 %}
+    <div class="clearfix visible-lg"></div>
+    {% endif %}
+    <!--/span-->
+    {% endfor %}
+</div><!--/row-->
+

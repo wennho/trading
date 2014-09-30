@@ -1,0 +1,11 @@
+{% extends "peerShop/baseIndex.html" %}
+
+{% block container %}
+
+    <h1>{{ object.name }}</h1>
+    <p>{{ numPeers }} peer{{ numPeers|pluralize }}</p>
+    {% if object.community.requiredDomainEmail %}
+        <p>Required email domain: {{ object.community.requiredDomainEmail }}</p>
+    {% endif %}
+{% endblock %}
+

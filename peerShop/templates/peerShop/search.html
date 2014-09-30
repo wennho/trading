@@ -1,0 +1,41 @@
+{% extends "peerShop/baseIndex.html" %}
+
+
+{% block container %}
+
+<form class="form-horizontal" role="search" action="{% url 'peerShop:item-search'%}">
+
+    <div class="form-group">
+<label class="col-sm-3 control-label">Search Term</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="Search" name="q"
+                   value="{{ request.GET.q }}">
+        </div>
+        <div class="col-sm-1">
+            <button type="submit" class="btn btn-primary search-btn">Search <span
+                    class="glyphicon glyphicon-search"></span></button>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Max Price</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" name="maxPrice"
+                   placeholder="Optional" value="{{ request.GET.maxPrice }}">
+        </div>
+    </div>
+
+
+</form>
+
+<div class="row row-offcanvas row-offcanvas-right">
+
+    <div class="col-xs-18 col-sm-12">
+        {% include 'peerShop/searchList.html' %}
+    </div>
+    <!--/span-->
+
+</div><!--/row-->
+
+{% endblock %}

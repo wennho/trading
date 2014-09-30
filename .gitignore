@@ -1,0 +1,9 @@
+*.pyc
+*.idea
+.coverage
+*/migrations/
+tmp/
+build/
+media/
+static_serve/
+htmlcov/

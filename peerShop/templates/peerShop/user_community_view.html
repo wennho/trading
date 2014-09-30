@@ -1,0 +1,8 @@
+{% extends "peerShop/baseIndex.html" %}
+
+{% block container %}
+    <h2>Communities</h2>
+    {% for group in object_list %}
+        <p class="lead">{{ group.name }}</p>
+    {% endfor %}
+{% endblock %}

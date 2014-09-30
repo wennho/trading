@@ -1,0 +1,1 @@
+git pull && ./manage.py collectstatic && touch mysite_uwsgi.ini

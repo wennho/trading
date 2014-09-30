@@ -1,0 +1,119 @@
+@charset "UTF-8";
+/*
+ * jQuery File Upload Plugin CSS Example 8.8.2
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+body {
+    padding-top: 60px;
+}
+
+.preview img {
+    max-height: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.preview {
+    position: relative;
+    width: 64px;
+    margin-top: 4px;
+}
+
+.preview a {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-col {
+    width:80px;
+}
+
+.img-col form label {
+    display: block;
+    text-align: center;
+}
+
+.additem:hover, .remove:hover {
+    cursor: pointer;
+    color: dodgerblue;
+}
+
+.remove {
+    font-size: 14pt;
+    position: absolute;
+    right: 0;
+    top: -5px;
+}
+
+.remove-bg {
+    position: absolute;
+    right: 2px;
+    top: -1px;
+    border-radius: 9px;
+    background-color: white;
+    height: 15px;
+    width: 15px;
+    opacity: 0.7;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table td.align-top {
+    vertical-align: top;
+    padding-top: 0px;
+}
+
+.table td.align-bot {
+    vertical-align: bottom;
+}
+
+.table p, .form-group {
+    margin-bottom: 0;
+}
+
+.absolute-center {
+    /*if changing max-height, need to change corresponding max in blueimp-gallery.js*/
+    max-height: 600px;
+}
+
+.detail {
+    background-color: ghostwhite;
+    color: #000000;
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.price {
+    display: inline-block;
+    width: auto;
+}
+
+.blueimp-gallery > .slides > .slide > .slide-content {
+    display: inline-block;
+    position: relative;
+}
+
+.table-doublestriped > :nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.table > tbody > tr > td.notopborder, .table > tbody + tbody {
+    border-top: 0px;
+}
+
+.table > tbody > tr > td.notopborder {
+    max-width: 700px;
+}
+

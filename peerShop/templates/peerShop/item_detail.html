@@ -1,0 +1,24 @@
+{% extends "peerShop/baseIndex.html" %}
+
+{% block container %}
+
+<div class="text-center">
+    {% for pic in object.itempic_set.all %}
+    <img src="{{ pic.image.url }}" class="img-item img-responsive"/>
+    {% endfor %}
+    <h1>{{ object.title }}</h1>
+
+    <h3>${{ object.price }}</h3>
+
+    <p>Posted by <a href="{% url 'peerShop:shop' object.user.username %}">{{ object.user.username }}</a></p>
+
+    <div class="description-item">
+        <p>{{ object.description }}</p>
+    </div>
+
+    <div class="bid-item-detail">
+        {% include 'peerShop/bid.html' with item=object SHOWSTATUS=True %}
+    </div>
+</div>
+{% endblock %}
+

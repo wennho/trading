@@ -1,0 +1,98 @@
+
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'peerShop:main' %}">PeerShop</a>
+        </div>
+        <div class="collapse navbar-collapse row">
+
+            <div class="col-sm-6 col-md-4">
+                <form class="navbar-form navbar-left" role="search" action="{% url 'peerShop:item-search'%}">
+
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" placeholder="Search" name="q"
+                               value="{{ request.GET.q }}">
+                            <span class="input-group-btn" style="position:static;">
+
+                                <button type="button" class="btn btn-default dropdown-toggle search-caret"
+                                        data-toggle="dropdown"><span class="caret search-options"></span></button>
+
+                                <button type="submit" class="btn btn-default search-btn"
+                                        style="border-top-right-radius: 4px; border-bottom-right-radius: 4px;"><span
+                                        class="glyphicon glyphicon-search"></span></button>
+                                 <ul class="dropdown-menu search-form">
+                                     <li><input type="text" class="form-control" name="maxPrice" placeholder="Max Price"></li>
+                                 </ul>
+                            </span>
+                    </div>
+                </form>
+            </div>
+
+            {% if request.user.is_authenticated %}
+
+
+            <form class="navbar-form navbar-right" role="form" method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+                <button type="submit" class="btn btn-link">Log Out</button>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li {% if activeNew %}class='active'{% endif %}><a href="{% url 'upload-new' %}">Listings</a></li>
+                <li {% if activeBid %}class='active'{% endif %}><a href="{% url 'peerShop:bid-list' %}">Bids</a></li>
+                <li {% if activeShop %}class='active'{% endif %}><a href="{% url 'peerShop:shop' request.user.username %}">Shopfront</a></li>
+
+                <li class="dropdown {% if activePeers or activeCommunity %}active{% endif %}">
+                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        {% if request.user.first_name or request.user.last_name %}
+                        {{ request.user.first_name }}
+                        {% else %}
+                        {{ request.user.username }}
+                        {% endif %}
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'peerShop:linked_list' request.user.username %}">Peers</a></li>
+                        <li><a href="{% url 'peerShop:user_community' request.user.username %}">Community</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            {% else %} <!--- user not authenticated --->
+            <form class="navbar-form navbar-right" role="form" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                <input id="id_login" name="login" placeholder="Username or e-mail" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input id="id_password" name="password" placeholder="Password" type="password" class="form-control"/>
+                </div>
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+                <button type="submit" class="btn btn-success">Log in</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li
+                {% block activeSignup %}{% endblock %}><a href="{% url 'account_signup' %}">Sign Up</a></li>
+            </ul>
+
+            {% endif %} <!--- /user not authenticated --->
+
+        </div>
+        <!-- /.nav-collapse -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.navbar -->

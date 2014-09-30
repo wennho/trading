@@ -1,0 +1,107 @@
+/*
+ * PeerShop Custom
+ * --------------------------------------------------
+ */
+
+body {
+  padding-top: 70px;
+}
+footer {
+  padding: 30px 0;
+}
+
+.errorlist, .deleted_item {
+    color:darkred;
+}
+
+.delete_cross {
+    color:#333;
+    margin-left:1em;
+    cursor: pointer;
+}
+
+.bid-input-td .bid-input {
+    max-width: 11em;
+    margin-top: 0.5em;
+}
+
+.bid-input-td .bid {
+    margin-bottom: 0;
+}
+
+.bid {
+    color:darkgreen;
+}
+
+.bid-status {
+    text-align: center;
+}
+
+.bid-status-accept{
+    width:100%;
+}
+
+.bid-item-detail {
+    max-width: 15em;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.capitalize {
+    text-transform:capitalize;
+}
+
+img.img-item {
+   margin-left:auto;
+   margin-right:auto;
+   max-width:600px;
+   margin-top: 20px;
+}
+
+.thumbnail-container {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+    padding: 0px;
+}
+
+.contains-img img {
+    max-height: 50px;
+}
+
+.table>tbody>tr>td {
+    vertical-align:middle;
+}
+
+.description-item {
+    text-align:left;
+    margin-left:auto;
+    margin-right:auto;
+    max-width:600px;
+    display:inline-block;
+}
+
+.jumbotron {
+    background-image:url("/static/jumbotron-bg.jpg");
+    margin-top:-20px;
+}
+
+tr.footer td {
+    padding: 0 50px 10px 0;
+}
+
+.search-form {
+    padding: 15px;
+    right: 0px;
+}
+
+.search-caret {
+    border-radius: 0px;
+}
+
+h1.inline-header {
+    display: inline-block;
+}
+
+.anon-info-box {
+    float:right;
+    max-width:25em;
+}

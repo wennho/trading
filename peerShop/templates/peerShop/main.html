@@ -1,0 +1,23 @@
+{% extends "peerShop/baseIndex.html" %}
+
+
+{% block jumbotron %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>PeerShop</h1>
+            <p>Easy buying, easy selling</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block container %}
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-18 col-sm-12">
+        {% include 'peerShop/mainList.html' %}
+        </div><!--/span-->
+
+      </div><!--/row-->
+
+{% endblock %}

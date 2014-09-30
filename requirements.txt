@@ -1,0 +1,4 @@
+mysql-python
+django-allauth
+pillow
+django-widget-tweaks

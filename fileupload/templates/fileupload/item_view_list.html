@@ -1,0 +1,63 @@
+{% for file in files %}
+<tbody class="template-download">
+<tr>
+    {% if file.error %}
+    <td/>
+    <td colspan=3>
+        <div>
+            {% for label, err in file.error %}
+            <span class="errorlist capitalize">{{ label }}:</span> {{ err }}
+            <br/>
+            {% endfor %}
+        </div>
+    </td>
+    {% else %}
+    <td rowspan=2 class="img-col">
+        {% for thumb in file.thumbs %}
+        <div class="preview">
+            <a href="{{ file.url }}" title="{{ file.title }}"><img src="{{ thumb.url }}"></a>
+            <div class="remove-bg"></div>
+            <div class="remove" onclick="deleteItemPic(this, '{{ thumb.deleteUrl }}');"><span class="glyphicon glyphicon-remove-circle"></span></div>
+        </div>
+        {% endfor %}
+        <div>
+            <form enctype="multipart/form-data" action="{{ createItemPicUrl }}" method="post">
+                {% csrf_token %}
+                <label for="itempic{{file.id}}" class="additem">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </label>
+                <input type="file" id="itempic{{file.id}}" class="itempic" name="image" onchange="addItemPic(this, '{{ createItemPicUrl }}');" style="display:none" multiple>
+                <input type="hidden" value="{{file.id}}" name="item">
+            </form>
+        </div>
+    </td>
+    <td class="align-bot">
+            <span class="name">
+                <a href="{{ file.url }}" title="{{ file.title }}">{{ file.title }}</a>
+            </span>
+    </td>
+    <td class="align-bot">
+        $ <span class="price">{{ file.price }}</span>
+    </td>
+    <td rowspan=2>
+        <button class="btn btn-default edit" data-type="{{ file.updateType }}" data-url="{{ file.updateUrl }}">
+            <i class="glyphicon glyphicon-edit"></i>
+            <span>Edit</span>
+        </button>
+        <button class="btn btn-danger delete" data-type="{{ file.deleteType }}" data-url="{{ file.deleteUrl }}"
+                data-xhr-fields='{"withCredentials":true}'>
+            <i class="glyphicon glyphicon-trash"></i>
+            <span>Delete</span>
+        </button>
+    </td>
+</tr>
+<tr>
+    <td colspan=2 class="notopborder align-top">
+
+        <p class="description">{{ file.description }}</p>
+
+    </td>
+    {% endif %} <!---- end of error-if ---->
+</tr>
+</tbody>
+{% endfor %}

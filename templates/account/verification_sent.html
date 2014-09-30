@@ -1,0 +1,18 @@
+{% extends "peerShop/baseIndex.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block container %}
+<div class="starter-template">
+    <h1>{% trans "Verify Your E-mail Address" %}</h1>
+
+    <div class="lead">
+    <p>{% blocktrans %}We have sent a new e-mail to you for verification.</p>
+    <p>Follow the link provided to finalize the signup
+        process. You may have to check your spam folder for the email.</p>
+    <p>Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+    </div>
+</div>
+{% endblock %}

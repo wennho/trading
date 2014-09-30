@@ -1,0 +1,89 @@
+{% extends "peerShop/baseIndex.html" %}
+
+{% block container %}
+
+<h1>Manage Bids</h1>
+
+{% if receivedBids %}
+<h3>Received Bids</h3>
+<p>Declined bids will disappear when the page is refreshed.</p>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Time</th>
+        <th>From</th>
+        <th></th>
+        <th>Item</th>
+        <th>Offer</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for bid in receivedBids %}
+    {% if bid.status != "Declined" %}
+    <tr class="contains-img bid-container" >
+        <td>{{ bid.bidTime }}</td>
+        <td><a href="{% url 'postman_write' bid.bidUser.username %}">{{ bid.bidUser.username }}</a></td>
+        <td>
+            <a href="{% url 'peerShop:item-detail' bid.item.id %}" class="preview"><img src="{{ bid.item.thumb.url }}"></a>
+        </td>
+        <td><a href="{% url 'peerShop:item-detail' bid.item.id %}">{{ bid.item.title }}</a></td>
+        <td>${{ bid.bidPrice }}</td>
+
+        <td id="{{ bid.id }}-status" class="text-center">{% include 'peerShop/bid_status.html' with FROM_RECEIVED_BIDS=True %}</td>
+
+        <form method="post" action="" id="{{ bid.id }}-status-form">
+        <td style="padding-left:1em;">
+
+            <button type="button" onclick="changeBidStatus({{ bid.id }}, 'Accepted');" id="{{bid.id}}-Accepted"
+                    class="btn btn-primary {% if bid.status == 'Accepted' %}hide{% endif %}" >Accept</button>
+            <button type="button" onclick="changeBidStatus({{ bid.id }}, '-');" id="{{bid.id}}--"
+                    class="btn btn-default {% if bid.status != 'Accepted' %}hide{% endif %}">Undo</button>
+            <button type="button" onclick="changeBidStatus({{ bid.id }}, 'Declined');" id="{{bid.id}}-Declined"
+                    class="btn btn-danger {% if bid.status == 'Accepted' %}hide{% endif %}">Decline</button>
+
+        </td>
+            <input name="id" type="hidden" value="{{ bid.id }}">
+            <input name="bidPrice" type="hidden" value="{{ bid.bidPrice }}">
+            <input name="item" type="hidden" value="{{ bid.item.id }}">
+            <input name="bidUser" type="hidden" value="{{ bid.bidUser }}">
+        </form>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+
+{% if placedBids %}
+<h3>Placed Bids</h3>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Time</th>
+        <th>To</th>
+        <th></th>
+        <th>Item</th>
+        <th>Offer</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for bid in placedBids %}
+    <tr class="contains-img bid-container" id="{{ bid.id }}">
+        <td>{{ bid.bidTime }}</td>
+        <td><a href="{% url 'postman_write' bid.itemUser.username %}">{{ bid.itemUser.username }}</a></td>
+        <td>
+            <a href="{% url 'peerShop:item-detail' bid.item.id %}" class="preview"><img src="{{ bid.item.thumb.url }}"></a>
+        </td>
+        <td><a href="{% url 'peerShop:item-detail' bid.item.id %}">{{ bid.item.title }}</a></td>
+
+
+        <td class="bid-input-td">{% include 'peerShop/bid.html' %}</td>
+        <td class="bid-status">{% include 'peerShop/bid_status.html' %}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

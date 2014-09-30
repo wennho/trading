@@ -1,0 +1,26 @@
+{% extends "peerShop/baseIndex.html" %}
+
+{% block activePeers %} class="active"{% endblock %}
+
+{% block container %}
+        <h2>Peers</h2>
+    {% if mutual %}
+        {% for user in mutual %}
+        <p class="lead"><a href="{% url 'peerShop:shop' user.username %}">{{ user.username }}</a></p>
+        {% endfor %}
+    {% else %}
+        <p class="lead">No peers yet</p>
+    {% endif %}
+
+  {% if to_add_back and request.user == profile_user %}
+        <h2>Linked to You</h2>
+        {% for user in to_add_back %}
+            <form method="post" action="{% url 'peerShop:link_new' %}">
+            {% csrf_token %}
+            <input type="hidden" name="toUser" value="{{ user.username }}">
+            <p class="lead"><button type="submit" class="btn btn-primary">Link Back</button> <a href="{% url 'peerShop:shop' user.username %}">{{ user.username }}</a></p>
+            </form>
+        {% endfor %}
+  {% endif %}
+
+{% endblock %}

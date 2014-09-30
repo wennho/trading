@@ -1,0 +1,73 @@
+{% extends "peerShop/baseIndex.html" %}
+
+{% block jumbotron %}
+    <div class="jumbotron">
+        <div class="container">
+            {% if not request.user.is_authenticated %}
+            {# allow anonymous bid submission #}
+            <div class="anon-info-box">
+                <p>Enter your name below to make offers on items without creating an account.</p>
+            <form method="post" action="">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" placeholder="Name">
+                </div>
+                <div class="form-group">                    
+                    <input class="form-control" type="text" name="email" placeholder="Email (optional)">                    
+                </div>
+            </form>
+            </div>
+            {% endif %}
+            <h1 class="inline-header">{{ shopuser.username }}</h1>
+            {% if networks %}
+            <p>Communities: {{ networks }}</p>
+            {% endif %}
+            {% if numPeers > 0 %}
+            <p>Linked by {{ numPeers }} peer{{numPeers|pluralize}}</p>
+            {% endif %}
+
+            {% if request.user.is_authenticated and request.user != shopuser %}
+            <div class="pull-right">
+
+            {# decide whether or not the current user is following this user #}
+
+                {% if isLinked %}
+                    {# they are following them, so show a "remove" url #}
+                    <!--TODO: use ajax instead for link/unlink-->
+                    <span class="btn btn-primary active">Linked</span>
+
+                {% else %}
+
+                    {# they are not following them, so show a link to start following #}
+                    <form method="post" action="{% url 'peerShop:link_new' %}">
+                        <input type="hidden" name="toUser" value="{{ shopuser.id }}">
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" class="btn btn-primary">Link</button>
+                    {% csrf_token %}
+                    </form>
+                {% endif %}
+
+
+            </div>
+
+            <p><a href="{% url 'postman_write' shopuser.username %}"><span class="glyphicon glyphicon-envelope"></span></a></p>
+            {% endif %}
+
+            <!--<p> TODO: Short shop description/welcome. Show shopowner stats (# friends, # recommendations, # sales)</p>-->
+        </div>
+    </div>
+{% endblock %}
+
+{% block container %}
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-18 col-sm-12">
+
+        {% include 'peerShop/shopList.html' %}
+
+        </div><!--/span-->
+
+      </div><!--/row-->
+
+{% endblock %}
+
