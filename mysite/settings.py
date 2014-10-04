@@ -43,7 +43,7 @@ if 'test' in sys.argv or 'test_coverage' in sys.argv:  # Covers regular testing 
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['*'] if DEBUG else ['192.30.32.198', '.luiwenhao.com', '.thepeershop.com']
+ALLOWED_HOSTS = ['*'] if DEBUG else ['192.184.81.183', '.luiwenhao.com', '.thepeershop.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -194,8 +194,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#if DEBUG:
+# temporary while postfix is not set up
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # ===================================================================
 # AllAuth
