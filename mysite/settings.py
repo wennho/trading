@@ -183,10 +183,6 @@ LOGGING = {
     }
 }
 
-# Set server email so that external email servers don't drop it 
-# (root@localhost is too suspicious)
-SERVER_EMAIL = 'wenhao@luiwenhao.com'
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.media',
@@ -194,9 +190,23 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-#if DEBUG:
-# temporary while postfix is not set up
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# ===================================================================
+# Email
+# ===================================================================
+
+# Set server email so that external email servers don't drop it 
+# (root@localhost is too suspicious)
+SERVER_EMAIL = 'test@tradingshop.com'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'tradingshoptest@gmail.com'
+EMAIL_HOST_PASSWORD = 'mystery123'
+EMAIL_PORT = 587
 
 # ===================================================================
 # AllAuth
