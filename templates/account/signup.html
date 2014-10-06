@@ -22,22 +22,36 @@
                 {{ form.non_field_errors }}
             </div>
             {% for field in form %}
-            <div class="form-group">
-                {% if not field.is_hidden %}
-                <label class="col-sm-3 control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% if field.name != "terms_conditions" %}
+                    <div class="form-group">
+
+                        {% if not field.is_hidden %}
+                            <label class="col-sm-3 control-label"
+                                   for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {% endif %}
+                        <div class="col-sm-5">
+                            {% render_field field class="form-control" %}
+                            {{ field.errors }}
+                        </div>
+                    </div>
                 {% endif %}
-                <div class="col-sm-5">
-                {% render_field field class="form-control" %}
-                {{ field.errors }}
-                </div>
-            </div>
             {% endfor %}
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
             {% endif %}
+
+            <div class="form-group">
+                <div class="col-sm-3"></div>
+
+                <div class="col-sm-5">
+                    {{ form.terms_conditions }} <span class="small">I accept the <a href="{% url 'peerShop:terms' %}">Terms and Conditions</a></span>
+                    {{ form.terms_conditions.errors }}
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-5">
-                    <button type="submit" class="btn btn-default">Sign Up</button>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
                 </div>
             </div>
         </form>

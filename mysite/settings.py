@@ -239,6 +239,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'peerShop:main'
+ACCOUNT_SIGNUP_FORM_CLASS = 'peerShop.forms.SignupForm'
 LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = 'peerShop:main'
 
