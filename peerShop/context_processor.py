@@ -1,4 +1,6 @@
+# encoding: utf-8
+
 def settings(request):
     return {
-        'site_name': 'Pa Shop'
+        'site_name': '汇'
     }
